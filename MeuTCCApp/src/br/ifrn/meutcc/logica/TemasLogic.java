@@ -18,4 +18,8 @@ public class TemasLogic {
 	public Tema getTema(int idTema) {
 		return tema.getTema(idTema);
 	}
+
+	public int countCandidatos(int idTema) {
+		return tema.countCandidatos(idTema);
+	}
 }

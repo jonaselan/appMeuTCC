@@ -37,4 +37,7 @@ public class Tema {
 	public Tema getTema(int idTema) {
 		return dao.getTema(idTema);
 	}
+	public int countCandidatos(int idTema) {
+		return dao.countCandidatos(idTema);
+	}
 }

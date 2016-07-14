@@ -63,10 +63,28 @@ public class TemaDAO {
 		return null;
 	}
 	
+	public int countCandidatos(int idTema) {
+		verificaConexao();
+		if (conn != null) {
+			try {
+				Statement stQtd = conn.createStatement();
+				ResultSet rsQtdCand = stQtd.executeQuery("retornar qtd de cantidados para o tema "+idTema);
+				// TODO 
+				//int qtd = (int)rsQtdCand;
+				// while (rsTemas.next()) -> fazer uma variavel auxiliar para ficar contado a cada interação
+				return 0;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
 	private void verificaConexao() {
 		String 	url = "jdbc:mysql://localhost/meutcc",
 				nome = "root",
-				senha = "senha!123";
+				senha = "root";
 		if (conn != null) {
 			return;
 		}
@@ -79,4 +97,6 @@ public class TemaDAO {
 			e.printStackTrace();
 		} 
 	}
+
+	
 }
