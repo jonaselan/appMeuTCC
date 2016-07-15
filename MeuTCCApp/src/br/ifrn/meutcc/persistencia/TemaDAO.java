@@ -68,11 +68,12 @@ public class TemaDAO {
 		if (conn != null) {
 			try {
 				Statement stQtd = conn.createStatement();
-				ResultSet rsQtdCand = stQtd.executeQuery("retornar qtd de cantidados para o tema "+idTema);
-				// TODO 
-				//int qtd = (int)rsQtdCand;
-				// while (rsTemas.next()) -> fazer uma variavel auxiliar para ficar contado a cada interação
-				return 0;
+				ResultSet rsQtdCand = stQtd.executeQuery("SELECT COUNT(idAluno) as qtd FROM tema t INNER JOIN candidato c ON t.id = c.idTema WHERE t.id = "+idTema);
+				int qtd = 0;
+				if (rsQtdCand.next()) {					
+					qtd = rsQtdCand.getInt("qtd");
+				}
+				return qtd;
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -84,7 +85,7 @@ public class TemaDAO {
 	private void verificaConexao() {
 		String 	url = "jdbc:mysql://localhost/meutcc",
 				nome = "root",
-				senha = "root";
+				senha = "admin";
 		if (conn != null) {
 			return;
 		}

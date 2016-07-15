@@ -30,7 +30,10 @@ public class ViewTema extends HttpServlet {
 		}
 		TemasLogic logic = new TemasLogic();
 		Tema tema = logic.getTema(idTema);
+		int qtdCandidatos = logic.countCandidatos(idTema);
 		request.setAttribute("tema", tema);
+		request.setAttribute("qtdCandidatos", qtdCandidatos);
+		request.setAttribute("registrado", false);
 		request.getRequestDispatcher("viewTema.jsp").forward(request, response);
 	}
 
