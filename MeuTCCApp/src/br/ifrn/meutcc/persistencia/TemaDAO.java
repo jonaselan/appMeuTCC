@@ -109,7 +109,7 @@ public class TemaDAO {
 	private void verificaConexao() {
 		String 	url = "jdbc:mysql://localhost/meutcc",
 				nome = "root",
-				senha = "admin";
+				senha = "root";
 		if (conn != null) {
 			return;
 		}
