@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="br.ifrn.meutcc.modelo.Tema"%>
+    pageEncoding="ISO-8859-1" import="br.ifrn.meutcc.modelo.Tema, br.ifrn.meutcc.modelo.Orientador"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,12 +10,12 @@
 <h1>Detalhes do Tema</h1>
 <%
 	Tema tema = (Tema) request.getAttribute("tema");
+	Orientador orientador = (Orientador) request.getAttribute("orientador");
 	int qtdCandidatos = (int) request.getAttribute("qtdCandidatos");
-
 	boolean registrado = (boolean) request.getAttribute("registrado");
 	
 	if (registrado) {
-		out.println("<h1>Registro efetuado!</h1>");
+		out.println("<h1 style='color: green;'>Registro efetuado!</h1>");
 	}
 
 	
@@ -26,6 +26,11 @@
 		out.println("<li> Descrição = "+tema.getDescricao()+"</li>");
 		out.println("<li> Candidatos interessados = "+qtdCandidatos+"</li>");
 		out.println("</ul>");
+		
+		if (orientador != null) {
+			out.println("<h4>Orientador: "+orientador.getNome()+"</h3>");
+		}
+		
 	} else {
 		out.println("<h3>Não há nenhum tema para mostrar!</h3>");
 	}

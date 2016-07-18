@@ -3,6 +3,7 @@ package br.ifrn.meutcc.logica;
 import java.util.List;
 
 import br.ifrn.meutcc.modelo.Tema;
+import br.ifrn.meutcc.modelo.Orientador;
 
 public class TemasLogic {
 	private Tema tema;
@@ -21,5 +22,9 @@ public class TemasLogic {
 
 	public int countCandidatos(int idTema) {
 		return tema.countCandidatos(idTema);
+	}
+	
+	public Orientador getOrientador(String matriculaOrientador) {
+		return tema.getOrientador(matriculaOrientador);
 	}
 }

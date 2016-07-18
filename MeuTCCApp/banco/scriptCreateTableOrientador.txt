@@ -1,0 +1,8 @@
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `matricula` varchar(45) DEFAULT NULL,
+  `senha` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `nome` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

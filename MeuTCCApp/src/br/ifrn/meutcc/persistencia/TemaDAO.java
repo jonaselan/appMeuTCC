@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ifrn.meutcc.modelo.Tema;
+import br.ifrn.meutcc.modelo.Orientador;
 
 public class TemaDAO {
 	private static final String MySQLDriver = "com.mysql.jdbc.Driver";
@@ -30,6 +31,7 @@ public class TemaDAO {
 					tema.setId(rsTemas.getInt("id"));
 					tema.setTitulo(rsTemas.getString("titulo"));
 					tema.setDescricao(rsTemas.getString("descricao"));
+					tema.setMatriculaOrientador(rsTemas.getString("matriculaOrientador"));
 					temas.add(tema);
 				}
 				return temas;
@@ -53,9 +55,31 @@ public class TemaDAO {
 					tema.setId(rsTemas.getInt("id"));
 					tema.setTitulo(rsTemas.getString("titulo"));
 					tema.setDescricao(rsTemas.getString("descricao"));
+					tema.setMatriculaOrientador(rsTemas.getString("matriculaOrientador"));
 		
 				}
 				return tema;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public Orientador getOrientador(String matriculaOrientador) {
+		verificaConexao();
+		if (conn != null) {
+			try {
+				Statement stOrientador = conn.createStatement();
+				ResultSet rsOrientador = stOrientador.executeQuery("SELECT u.id, u.nome, u.matricula FROM tema t INNER JOIN usuario u on t.matriculaOrientador = u.matricula WHERE t.matriculaOrientador = "+matriculaOrientador);
+				Orientador orientador = null;
+				if (rsOrientador.next()) {
+					orientador = new Orientador();
+					orientador.setId(rsOrientador.getInt("u.id"));
+					orientador.setNome(rsOrientador.getString("u.nome"));
+					orientador.setMatricula(rsOrientador.getString("u.matricula"));		
+				}
+				return orientador;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

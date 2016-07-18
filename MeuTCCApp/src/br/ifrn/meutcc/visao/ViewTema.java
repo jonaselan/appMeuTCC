@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.ifrn.meutcc.logica.TemasLogic;
 import br.ifrn.meutcc.modelo.Tema;
+import br.ifrn.meutcc.modelo.Orientador;
 
 @WebServlet("/ViewTema")
 public class ViewTema extends HttpServlet {
@@ -28,10 +29,12 @@ public class ViewTema extends HttpServlet {
 		} catch (NumberFormatException nfex) {
 			nfex.printStackTrace();
 		}
-		TemasLogic logic = new TemasLogic();
+		TemasLogic logic = new TemasLogic();		
 		Tema tema = logic.getTema(idTema);
+		Orientador orientador = logic.getOrientador(tema.getMatriculaOrientador());
 		int qtdCandidatos = logic.countCandidatos(idTema);
 		request.setAttribute("tema", tema);
+		request.setAttribute("orientador", orientador);
 		request.setAttribute("qtdCandidatos", qtdCandidatos);
 		request.setAttribute("registrado", false);
 		request.getRequestDispatcher("viewTema.jsp").forward(request, response);
