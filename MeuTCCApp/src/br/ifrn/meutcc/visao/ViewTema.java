@@ -36,7 +36,7 @@ public class ViewTema extends HttpServlet {
 		request.setAttribute("tema", tema);
 		request.setAttribute("orientador", orientador);
 		request.setAttribute("qtdCandidatos", qtdCandidatos);
-		request.setAttribute("registrado", false);
+		request.setAttribute("registrado", 0);
 		request.getRequestDispatcher("viewTema.jsp").forward(request, response);
 	}
 

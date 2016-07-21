@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 
 public class CandidatoDAO {
@@ -14,23 +15,25 @@ public class CandidatoDAO {
 		super();
 	}
 	
-	public boolean addCandidato(int idAluno, int idTema) {
+	public int addCandidato(int idAluno, int idTema) {
 		verificaConexao();
 		if (conn != null) {
 			try {
 				Statement st = conn.createStatement();
 				int registered = st.executeUpdate("INSERT INTO candidato (idAluno, idTema) VALUES (" + idAluno + "," + idTema +")");
 				if (registered > 0) {					
-					return true;
+					return 1;
 				}
 				
-				return false;
-				
+				return 0;
+			
+			} catch (MySQLIntegrityConstraintViolationException ea) {
+				return 2;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return false;
+		return 0;
 	}
 	
 	

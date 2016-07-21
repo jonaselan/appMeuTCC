@@ -120,7 +120,7 @@ public class TemaDAO {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	

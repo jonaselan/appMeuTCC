@@ -19,10 +19,16 @@
 		Tema tema = (Tema) request.getAttribute("tema");
 		Orientador orientador = (Orientador) request.getAttribute("orientador");
 		int qtdCandidatos = (int) request.getAttribute("qtdCandidatos");
-		boolean registrado = (boolean) request.getAttribute("registrado");
+		int registrado = (int) request.getAttribute("registrado");
 		
-		if (registrado) {
-			out.println("<h1 style='color: green;'>Registro efetuado!</h1>");
+		switch (registrado) {
+		case 1:
+			out.println("<div class='alert alert-success'> <strong>Parabéns</strong> Você se cadastrou nesse tema! </div>");
+			break;
+		case 2:
+			out.println("<div class='alert alert-danger'> <strong>Opa</strong> Você já se cadastrou nesse tema! </div>");
+			break;
+		default:
 		}
 	
 		
@@ -45,7 +51,7 @@
 		out.println("<form action='addCandidato' method='POST'>");
 		out.println("<input type='hidden' name='idAluno' value='1' />");
 		out.println("<input type='hidden' name='idTema' value="+tema.getId()+" />");
-		out.println("<a href='#' onclick='this.parentNode.submit()'>candidatar</a>");
+		out.println("<a class='btn btn-primary' href='#' onclick='this.parentNode.submit()'>candidatar</a>");
 		out.println("</form>");
 	%>
 </div>

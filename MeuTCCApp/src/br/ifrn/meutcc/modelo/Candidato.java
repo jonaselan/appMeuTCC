@@ -10,7 +10,7 @@ public class Candidato {
 		dao = new CandidatoDAO();
 	}
 	
-	public boolean addCandidato(int idAluno, int idTema) {
+	public int addCandidato(int idAluno, int idTema) {
 		return dao.addCandidato(idAluno, idTema);
 	}
 

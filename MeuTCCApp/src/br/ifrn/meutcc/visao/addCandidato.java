@@ -1,6 +1,7 @@
 package br.ifrn.meutcc.visao;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import br.ifrn.meutcc.logica.CandidatosLogic;
 import br.ifrn.meutcc.logica.TemasLogic;
 import br.ifrn.meutcc.modelo.Tema;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @WebServlet("/addCandidato")
 public class addCandidato extends HttpServlet {
@@ -25,15 +28,19 @@ public class addCandidato extends HttpServlet {
 		String idAlunoParam = request.getParameter("idAluno");
 		int idTema = -1;
 		int idAluno = -1;
+		int registrado = 0;
+
 		try {
 			idTema = Integer.parseInt(idTemaParam);
 			idAluno = Integer.parseInt(idAlunoParam);
+
 		} catch (NumberFormatException nfex) {
 			nfex.printStackTrace();
 		}
+
 		CandidatosLogic logicCandidatos = new CandidatosLogic();
-		boolean registrado = logicCandidatos.addCandidato(idAluno, idTema);
-		
+		registrado = logicCandidatos.addCandidato(idAluno, idTema);
+			
 		TemasLogic logicTemas = new TemasLogic();
 		Tema tema = logicTemas.getTema(idTema);
 		
