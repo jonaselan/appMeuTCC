@@ -3,6 +3,7 @@ package br.ifrn.meutcc.modelo;
 import java.util.List;
 
 import br.ifrn.meutcc.persistencia.TemaDAO;
+import br.ifrn.meutcc.persistencia.FabricaDAO;
 
 public class Tema {
 	private int id;
@@ -12,7 +13,12 @@ public class Tema {
 	private TemaDAO dao;
 	public Tema() {
 		super();
-		dao = new TemaDAO();
+		try {
+			FabricaDAO f = FabricaDAO.getFabrica();
+			dao = f.createTemaDAO();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public int getId() {
 		return id;

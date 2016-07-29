@@ -41,7 +41,9 @@
 			out.println("</ul>");
 			
 			if (orientador != null) {
-				out.println("<h4>Orientador: "+orientador.getNome()+"</h3>");
+				out.println("<h4>Orientador: "+orientador.getNome()+"</h4>");
+			} else {
+				out.println("<h4>Nenhum orientador está cadastrado para esse tema!</h4>");
 			}
 			
 		} else {

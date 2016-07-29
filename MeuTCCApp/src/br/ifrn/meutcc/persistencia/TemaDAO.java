@@ -1,7 +1,6 @@
 package br.ifrn.meutcc.persistencia;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,15 +11,24 @@ import br.ifrn.meutcc.modelo.Tema;
 import br.ifrn.meutcc.modelo.Orientador;
 
 public class TemaDAO {
-	private static final String MySQLDriver = "com.mysql.jdbc.Driver";
-	private Connection conn = null;
 	
-	public TemaDAO() {
-		super();
+	Conexao con = null;
+	static TemaDAO instancia = null;
+
+	private TemaDAO(Conexao con) { 
+		this.con = con; 
+	}
+	
+	public static TemaDAO getInstancia(Conexao con) {
+		if (instancia == null) {
+			instancia = new TemaDAO(con);
+		}
+		return instancia;
 	}
 	
 	public List<Tema> listTemas(int idCurso) {
-		verificaConexao();
+		con.conectarBD();
+		Connection conn = con.getConexaoBD();
 		if (conn != null) {
 			try {
 				Statement stListaTema = conn.createStatement();
@@ -44,7 +52,8 @@ public class TemaDAO {
 	}
 	
 	public Tema getTema(int idTema) {
-		verificaConexao();
+		con.conectarBD();
+		Connection conn = con.getConexaoBD();
 		if (conn != null) {
 			try {
 				Statement stListaTema = conn.createStatement();
@@ -67,7 +76,8 @@ public class TemaDAO {
 	}
 	
 	public Orientador getOrientador(String matriculaOrientador) {
-		verificaConexao();
+		con.conectarBD();
+		Connection conn = con.getConexaoBD();
 		if (conn != null) {
 			try {
 				Statement stOrientador = conn.createStatement();
@@ -88,7 +98,9 @@ public class TemaDAO {
 	}
 	
 	public int countCandidatos(int idTema) {
-		verificaConexao();
+		con.conectarBD();
+		Connection conn = con.getConexaoBD();
+		
 		if (conn != null) {
 			try {
 				Statement stQtd = conn.createStatement();
@@ -105,23 +117,4 @@ public class TemaDAO {
 		}
 		return 0;
 	}
-	
-	private void verificaConexao() {
-		String 	url = "jdbc:mysql://localhost/meutcc",
-				nome = "root",
-				senha = "root";
-		if (conn != null) {
-			return;
-		}
-		try {
-			Class.forName(MySQLDriver);
-			conn = DriverManager.getConnection(url, nome, senha);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	
 }

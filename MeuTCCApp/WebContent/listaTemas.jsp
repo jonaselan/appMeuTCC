@@ -23,7 +23,7 @@
 				if (temas != null && !temas.isEmpty()) {
 					for(Tema t: temas) {
 						out.println("<li><a href=\"/MeuTCC/ViewTema?id="+t.getId()+
-										"\">["+t.getId()+"] "+t.getTitulo()+"</a>.</li>");
+										"\">["+t.getId()+"] "+t.getTitulo()+"</a></li>");
 					}
 				} else {
 					out.println("<li>Nenhum tema cadastrado para o referido curso!</li>");
